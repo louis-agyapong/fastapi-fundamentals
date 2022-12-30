@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "fastapi-fundamentals"
+version = "0.1.0"
+description = "Learning FastAPI"
+authors = ["Louis Agyapong <47106199+louis-agyapong@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "fastapi_fundamentals"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+black = "^22.12.0"
+python-decouple = "^3.6"
+fastapi = "^0.88.0"
+uvicorn = "^0.20.0"
+mypy = "^0.991"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
