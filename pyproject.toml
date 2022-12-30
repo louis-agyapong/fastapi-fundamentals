@@ -13,6 +13,7 @@ python-decouple = "^3.6"
 fastapi = "^0.88.0"
 uvicorn = "^0.20.0"
 mypy = "^0.991"
+ipython = "^8.7.0"
 
 
 [build-system]
