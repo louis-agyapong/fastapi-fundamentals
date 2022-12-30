@@ -23,7 +23,7 @@ async def read_item(item_id: int):
     return {"item_id": item_id}
 
 
-@app.get("models/{model_name}")
+@app.get("/models/{model_name}")
 async def get_model(model_name: ModelName):
     """
     Predefined values using Enum
