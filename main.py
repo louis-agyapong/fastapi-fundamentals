@@ -25,8 +25,9 @@ async def read_item(skip: int = 0, limit: int = 10):
 
 
 @app.get("/items/{item_id}")
-async def read_items(item_id: int):
-    return {"item_id": item_id}
+async def read_items(item_id: str, needy: str, skip: int = 0, limit: int | None = None):
+    item = {"item_id": item_id, "needy": needy, "skip": skip, "limit": limit}
+    return item
 
 
 @app.get("/models/{model_name}")
