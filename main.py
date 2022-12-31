@@ -1,7 +1,7 @@
 from enum import Enum
 
 from fastapi import FastAPI
-from pyexpat import model
+from pydantic import BaseModel
 
 
 class ModelName(str, Enum):
@@ -15,18 +15,29 @@ app = FastAPI()
 fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Barz"}]
 
 
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
 @app.get("/")
 async def root():
     return {"message": "Hello world"}
 
-@app.get("/item/")
-async def read_item(skip: int = 0, limit: int = 10): 
-    return fake_items_db[skip : skip + limit]
-
 
 @app.get("/items/{item_id}")
-async def read_items(item_id: str, needy: str, skip: int = 0, limit: int | None = None):
+async def read_user_item(item_id: str, needy: str, skip: int = 0, limit: int | None = None):
     item = {"item_id": item_id, "needy": needy, "skip": skip, "limit": limit}
+    return item
+
+
+@app.post("/items/")
+async def create_item(item: Item):
+    """
+    Create item
+    """
     return item
 
 
