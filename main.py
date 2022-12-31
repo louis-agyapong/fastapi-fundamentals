@@ -1,7 +1,7 @@
 from enum import Enum
-from pyexpat import model
 
 from fastapi import FastAPI
+from pyexpat import model
 
 
 class ModelName(str, Enum):
@@ -12,14 +12,20 @@ class ModelName(str, Enum):
 
 app = FastAPI()
 
+fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Barz"}]
+
 
 @app.get("/")
 async def root():
     return {"message": "Hello world"}
 
+@app.get("/item/")
+async def read_item(skip: int = 0, limit: int = 10): 
+    return fake_items_db[skip : skip + limit]
+
 
 @app.get("/items/{item_id}")
-async def read_item(item_id: int):
+async def read_items(item_id: int):
     return {"item_id": item_id}
 
 
@@ -35,6 +41,7 @@ async def get_model(model_name: ModelName):
         return {"model_name": model_name, "message": "LeCNN all the images"}
 
     return {"model_name": model_name, "message": "Have some residuals"}
+
 
 @app.get("/path/{file_path:path}")
 async def read_file(file_path: str):
