@@ -38,7 +38,11 @@ async def create_item(item: Item):
     """
     Create item
     """
-    return item
+    item_dict = item.dict()
+    if item.tax:
+        price_with_tax: float = item.price + item.tax
+        item_dict.update({"price_with_tax": price_with_tax})
+    return item_dict
 
 
 @app.get("/models/{model_name}")
