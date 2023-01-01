@@ -28,7 +28,7 @@ async def root():
 
 
 @app.get("/items/")
-async def read_items(q: str | None = Query(default=None, max_length=50)):
+async def read_items(q: str | None = Query(default=None, max_length=50, regex="^fixedquery$")):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
